@@ -338,7 +338,11 @@ void main() {
             synchrony += (sync_goal - synchrony)*DAMPING;
 
             if (synchrony >= (1.0-epsilon) || synchrony <= (epsilon-1.0) ){
-                sync_goal *= -1
+                sync_goal = 0;
+            } else if (synchrony >= (-epsilon) && synchrony < 0){
+                sync_goal = 1;
+            } else if (synchrony <= (epsilon) && synchrony > 0){
+                sync_goal = -1;
             }
         }
 
@@ -346,7 +350,7 @@ void main() {
         mat4.invert(viewMatrix, viewMatrix);
         mat4.translate(viewMatrix, viewMatrix, [0, 0, -cameraCurr]);
         mat4.rotateY(viewMatrix, viewMatrix, -diff_x*2*Math.PI/canvas.height);
-        mat4.rotateX(viewMatrix, viewMatrix, -diff_y*2*Math.PI/canvas.width);
+        // mat4.rotateX(viewMatrix, viewMatrix, -diff_y*2*Math.PI/canvas.width);
         mat4.translate(viewMatrix, viewMatrix, [0, 0, cameraCurr]);
         mat4.invert(viewMatrix, viewMatrix);
         // mat4.rotateZ(viewMatrix, viewMatrix, -0.01);

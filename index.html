@@ -4,7 +4,7 @@
     <meta charset=utf-8>
     <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <link rel=icon href=assets/favicon.ico>
+    <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="components/nav.js" type="text/javascript" defer></script>
     <script src="components/footer.js" type="text/javascript" defer></script>
@@ -12,7 +12,6 @@
     <script src="js/point-functions.js" type="text/javascript" defer></script>
     <script src="js/utils.js" type="text/javascript" defer></script>
     <script src="js/gl-matrix-min.js" type="text/javascript" defer></script>
-
     <script src='http://git.io/perlin.js'></script>
 
     <title>Garrett Flynn | Home</title>
@@ -84,21 +83,21 @@
     let resolution;
     let INITIAL_Z_OFFSET = 1.7;
     let VOLTAGE_Z_OFFSET = .5;
-    let AUTO_ROTATION_X = 0.0; //0.2;
+    let AUTO_ROTATION_X = 0.05; //0.2;
     let INNER_Z = 2*VOLTAGE_Z_OFFSET;
 
     let displacement = [];
     let disp_flat = [];
     SYNCHRONY_BUFFER_SIZE = 500;
-    let synchrony = 0;
-    let sync_goal = 1;
+    let synchrony = 1;
+    let sync_goal = 0;
 
     // Camera
     let cameraHome = INITIAL_Z_OFFSET;
     let cameraCurr = INITIAL_Z_OFFSET;
 
     // Point Movement
-    let DAMPING = .05;
+    let DAMPING = .01;
     let epsilon = .001;
     let t = 0.0;
     let diff_x = 0;
