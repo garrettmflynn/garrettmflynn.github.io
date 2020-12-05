@@ -145,9 +145,13 @@ a.link .current{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/sync.gif');
-    background-size: cover;
-    background-position: center;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../assets/sync.gif');*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
 }
 
 
