@@ -6,10 +6,7 @@
 async function particleBrain() {
 
     let temp;
-    perlin.seed()
-
-    // ------------------------------------- P5 Ported Variables ------------------------------------ //
-
+    
     if (!gl) {
         throw new Error('WebGL not supported')
     }
