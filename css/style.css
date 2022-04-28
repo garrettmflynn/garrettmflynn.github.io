@@ -375,10 +375,10 @@ section {
     padding-right: calc(50px + var(--nav-width));
 }
 
-section hr {
+/* section hr {
     margin-left:0;
     width: 25px;
-}
+} */
 
 #work {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/work.jpg');
