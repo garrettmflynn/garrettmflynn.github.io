@@ -5,7 +5,7 @@ class Footer extends HTMLElement {
 
 connectedCallback() {
     this.innerHTML = `
-    <div class="center-footer">
+    <footer>
       <div class="social">
         <a href='https://twitter.com/brainsatplay' label='Twitter'>
           <svg viewBox="0 0 24 24">
@@ -23,8 +23,8 @@ connectedCallback() {
           </svg>
         </a>
       </div>
-      <p class="footer-text center unavailable">© 2020 Garrett Flynn</p>
-    </div>
+      <p class="footer-text center unavailable">© 2022 Garrett Flynn</p>
+    </footer>
     `;
 }
 }
