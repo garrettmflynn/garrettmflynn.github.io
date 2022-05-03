@@ -159,7 +159,7 @@ nav a.link {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 #me  > img {
@@ -249,13 +249,6 @@ a.active{
 
 #hero h1 {
     font-size: 60px;
-}
-@media only screen and (max-width: 987px) {
-
-    #hero {
-        text-align: center;
-    }
-   
 }
 
 /* #hero > div {
@@ -434,3 +427,16 @@ section h2 {
         width: 100%;
     }
   
+/* Media Queries */
+    @media only screen and (max-width: 987px) {
+
+        #hero {
+            text-align: center;
+        }
+
+        #about h2 {
+            font-size: 30px;
+        }
+       
+    }
+    
