@@ -1,0 +1,1 @@
+export const originalPurpose = 'simplify the development of brain-computer interface (BCI) applications using the latest browser technologies'
