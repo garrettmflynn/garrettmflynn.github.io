@@ -2214,20 +2214,6 @@ function hierarchy(o, id, toMerge = {}, parent, directParent, opts = {}, callbac
 
 // src/index.ts
 var create2 = (config, toMerge = {}, options = {}) => {
-  const parent = config.__parent ?? toMerge.__parent ?? document.body;
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    const div = document.createElement("div");
-    const p1 = document.createElement("p");
-    const message = 'Sorry, this app is not supported on mobile devices.'
-    console.log(message)
-    p1.innerHTML = `<b><${message}</b>`;
-    div.appendChild(p1);
-    const p2 = document.createElement("p");
-    p2.innerText = "Please use a desktop or laptop computer to view this app.";
-    div.appendChild(p2);
-    div.style = "background: black; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;";
-    parent.appendChild(div);
-  }
   options = deep(options);
   let monitor;
   if (options.monitor instanceof src_default) {
