@@ -200,6 +200,7 @@ var specialKeys = {
   stop: "__ondisconnected",
   connected: "__connected",
   resolved: "__resolved",
+  started: "__started",
   hierarchy: "__children",
   element: "__element",
   webcomponents: "__define",
@@ -447,7 +448,7 @@ var Inspectable = class {
       setFromPath(path, update, this.proxy, { create: true });
     };
     this.check = canCreate;
-    this.create = (key, parent, val, set2 = false) => {
+    this.create = (key, parent, val, set3 = false) => {
       const create3 = this.check(parent, key, val);
       if (val === void 0)
         val = parent[key];
@@ -455,7 +456,7 @@ var Inspectable = class {
         parent[key] = new Inspectable(val, this.options, key, this);
         return parent[key];
       }
-      if (set2) {
+      if (set3) {
         try {
           this.proxy[key] = val ?? parent[key];
         } catch (e) {
@@ -573,7 +574,7 @@ var info = (id, callback, path, originalValue, base, listeners2, options, refSho
     });
     return res;
   };
-  const set2 = (path2, value2) => {
+  const set3 = (path2, value2) => {
     const thisBase = shortcutRef ?? base;
     setFromOptions(path2, value2, options, {
       reference: thisBase,
@@ -609,7 +610,7 @@ var info = (id, callback, path, originalValue, base, listeners2, options, refSho
       return get3(shortcutPath ?? info2.path.absolute);
     },
     set current(val) {
-      set2(shortcutPath ?? info2.path.absolute, val);
+      set3(shortcutPath ?? info2.path.absolute, val);
     },
     get parent() {
       return get3(shortcutPath ? shortcutPath?.slice(0, -1) : info2.path.parent);
@@ -1550,6 +1551,94 @@ function merge2(base, __compose = {}, path = [], opts = {}) {
   });
 }
 
+// src/create/helpers/path.ts
+var pathLoader = (keys, base, id, opts, parent) => {
+  const hasParent = (parent ?? base[keys.parent])?.[keys.component];
+  const isESC = { value: "", enumerable: false, writable: true };
+  if (hasParent) {
+    if (typeof id === "string") {
+      const path = hasParent[keys.path];
+      if (path)
+        isESC.value = [path, id];
+      else
+        isESC.value = [id];
+      isESC.value = isESC.value.join(opts.keySeparator);
+    }
+  }
+  Object.defineProperty(base, keys.path, isESC);
+};
+var path_default = pathLoader;
+
+// src/create/component.ts
+var registry = {};
+var ogCreateElement = document.createElement;
+document.createElement = function(name2, options) {
+  const info2 = registry[name2];
+  const created = info2 && !info2.autonomous ? ogCreateElement.call(this, info2.tag, { is: name2 }) : ogCreateElement.call(this, name2, options);
+  return created;
+};
+var tagToClassMap = {
+  li: "LI",
+  ol: "OL",
+  ul: "UL",
+  br: "BR",
+  p: "Paragraph",
+  textarea: "TextArea",
+  a: "Anchor"
+};
+var isAutonomous = false;
+var define = (config, esm2) => {
+  if (!registry[config.name]) {
+    esm2 = deep(esm2);
+    const clsName = isAutonomous ? "" : tagToClassMap[config.extends] ?? config.extends[0].toUpperCase() + config.extends.slice(1);
+    const BaseClass = new Function(`
+
+        class ESComponentBase extends HTML${clsName}Element { 
+            #properties;
+            constructor(properties={}){
+                super()
+               this.#properties = properties
+            }
+        }
+        return ESComponentBase;
+
+        `)();
+    class ESComponent extends BaseClass {
+      constructor(properties) {
+        super(properties);
+        esm2[specialKeys.element] = this;
+        src_default2(esm2);
+      }
+      connectedCallback() {
+        const component = this[specialKeys.component];
+        const parent = component[specialKeys.parent];
+        component[specialKeys.parent] = parent;
+      }
+      disconnectedCallback() {
+        console.log("Custom element removed from page.");
+      }
+      adoptedCallback() {
+        console.log("Custom element moved to new page.");
+      }
+      attributeChangedCallback(name2, oldValue, newValue) {
+        console.log("Custom element attributes changed.", name2, oldValue, newValue);
+      }
+    }
+    registry[config.name] = {
+      class: ESComponent,
+      autonomous: isAutonomous,
+      tag: config.extends
+    };
+    const cls = registry[config.name].class;
+    if (isAutonomous)
+      customElements.define(config.name, cls);
+    else
+      customElements.define(config.name, cls, { extends: config.extends });
+  } else {
+    console.log("Already created component...");
+  }
+};
+
 // src/create/element.ts
 var boundEditorKey = `__bound${specialKeys.editor}s`;
 var createSVG = (name2 = "svg", options) => document.createElementNS("http://www.w3.org/2000/svg", name2, options);
@@ -1579,13 +1668,19 @@ var createElement = (args, parent) => {
   else
     return document.createElement(...args);
 };
-function create(id, esm2, parent, states, utilities = {}) {
+function create(id, esm2, parent, options = {}, states) {
+  const utilities = options?.utilities;
   let element = esm2[specialKeys.element];
   const attributes = esm2[specialKeys.attributes];
   let info2;
   if (!(element instanceof Element)) {
     const mustShow = attributes && Object.keys(attributes).length || checkForInternalElements(esm2);
     const defaultTagName = mustShow ? "div" : "link";
+    const isWebComponent = element && typeof element === "object" && element.name && element.extends;
+    if (isWebComponent) {
+      define(element, esm2);
+      esm2[specialKeys.element] = element = element.name;
+    }
     if (element === void 0)
       element = defaultTagName;
     else if (Array.isArray(element))
@@ -1624,6 +1719,7 @@ function create(id, esm2, parent, states, utilities = {}) {
   let isConnected, isResolved;
   Object.defineProperty(esm2, `${specialKeys.connected}`, {
     value: new Promise((resolve3) => isConnected = async () => {
+      Object.defineProperty(esm2, `__${specialKeys.connected}`, { value: true, writable: false, enumerable: false });
       resolve3(true);
     }),
     writable: false,
@@ -1636,7 +1732,7 @@ function create(id, esm2, parent, states, utilities = {}) {
     writable: false,
     enumerable: false
   });
-  Object.defineProperty(esm2, `__${specialKeys.connected}`, { value: isConnected, writable: false, enumerable: false });
+  Object.defineProperty(esm2, `__${specialKeys.connected}`, { value: isConnected, writable: true, enumerable: false });
   Object.defineProperty(esm2, `__${specialKeys.resolved}`, { value: isResolved, writable: false, enumerable: false });
   const isEventListener = (key, value2) => key.slice(0, 2) === "on" && typeof value2 === "function";
   const handleAttribute = (key, value2, context) => {
@@ -1721,28 +1817,38 @@ function create(id, esm2, parent, states, utilities = {}) {
       }
       if (v?.[specialKeys.element] instanceof Element)
         v = v[specialKeys.element];
-      if (esm2[specialKeys.element] instanceof Element) {
-        if (esm2[specialKeys.element].parentNode)
-          esm2[specialKeys.element].remove();
-        if (v instanceof Element) {
-          const desiredPosition = esm2[specialKeys.childPosition];
-          const nextPosition = v.children.length;
-          let ref = esm2[specialKeys.element];
-          const __editor = esm2[`__${specialKeys.editor}`];
-          if (__editor)
-            ref = __editor;
-          if (desiredPosition !== void 0 && desiredPosition < nextPosition)
-            v.children[desiredPosition].insertAdjacentElement("beforebegin", ref);
-          else
-            v.appendChild(ref);
-          if (__editor)
-            __editor.setComponent(esm2);
+      const current = esm2[specialKeys.element].parentNode;
+      if (current !== v) {
+        if (esm2[specialKeys.element] instanceof Element) {
+          if (current)
+            esm2[specialKeys.element].remove();
+          if (v instanceof Element) {
+            const desiredPosition = esm2[specialKeys.childPosition];
+            const nextPosition = v.children.length;
+            let ref = esm2[specialKeys.element];
+            const __editor = esm2[`__${specialKeys.editor}`];
+            if (__editor)
+              ref = __editor;
+            if (desiredPosition !== void 0 && desiredPosition < nextPosition)
+              v.children[desiredPosition].insertAdjacentElement("beforebegin", ref);
+            else
+              v.appendChild(ref);
+            if (__editor)
+              __editor.setComponent(esm2);
+          }
+        } else {
+          console.error("No element was created for this Component...", esm2);
         }
-      } else {
-        console.error("No element was created for this Component...", esm2);
       }
       if (v instanceof HTMLElement) {
-        esm2[`__${specialKeys.connected}`]();
+        path_default(specialKeys, esm2, id, options, v);
+        const parentComponent = v[specialKeys.component];
+        const isConnected2 = esm2[`__${specialKeys.connected}`];
+        const toConnect = isConnected2 instanceof Function;
+        if (esm2[`__${specialKeys.started}`] !== true && parentComponent?.[`__${specialKeys.started}`] === true)
+          esm2[specialKeys.start]();
+        if (toConnect)
+          isConnected2();
       }
     },
     enumerable: true
@@ -1778,10 +1884,10 @@ function create(id, esm2, parent, states, utilities = {}) {
         console.error("Editor class not provided in options.utilities.code");
     }
     if (cls) {
-      let options = utilities.code?.options ?? {};
-      options = typeof config === "boolean" ? options : { ...options, ...config };
-      const bound = options.bind;
-      const __editor = new cls(options);
+      let options2 = utilities.code?.options ?? {};
+      options2 = typeof config === "boolean" ? options2 : { ...options2, ...config };
+      const bound = options2.bind;
+      const __editor = new cls(options2);
       __editor.start();
       Object.defineProperty(esm2, `__${specialKeys.editor}`, { value: __editor });
       if (bound !== void 0) {
@@ -1814,77 +1920,6 @@ function create(id, esm2, parent, states, utilities = {}) {
   return element;
 }
 
-// src/create/component.ts
-var registry = {};
-var ogCreateElement = document.createElement;
-document.createElement = function(name2, options) {
-  const info2 = registry[name2];
-  const created = info2 && !info2.autonomous ? ogCreateElement.call(this, info2.tag, { is: name2 }) : ogCreateElement.call(this, name2, options);
-  return created;
-};
-var tagToClassMap = {
-  li: "LI",
-  ol: "OL",
-  ul: "UL",
-  br: "BR",
-  p: "Paragraph",
-  textarea: "TextArea",
-  a: "Anchor"
-};
-var isAutonomous = false;
-var define = (config, esm2) => {
-  esm2 = Object.assign({}, esm2);
-  if (!registry[config.name]) {
-    const clsName = isAutonomous ? "" : tagToClassMap[config.extends] ?? config.extends[0].toUpperCase() + config.extends.slice(1);
-    const BaseClass = new Function(`
-
-        class ESComponentBase extends HTML${clsName}Element { 
-            #properties;
-            constructor(properties={}){
-                super()
-               this.#properties = properties
-            }
-        }
-        return ESComponentBase;
-
-        `)();
-    class ESComponent extends BaseClass {
-      constructor(properties) {
-        super(properties);
-        resolve(src_default2(esm2), (res) => {
-          res.__element = this;
-          this.__component = res;
-        });
-      }
-      connectedCallback() {
-        console.log("Custom element added to page.");
-        this.__component.____connected();
-      }
-      disconnectedCallback() {
-        console.log("Custom element removed from page.");
-      }
-      adoptedCallback() {
-        console.log("Custom element moved to new page.");
-      }
-      attributeChangedCallback(name2, oldValue, newValue) {
-        console.log("Custom element attributes changed.", name2, oldValue, newValue);
-      }
-    }
-    registry[config.name] = {
-      class: ESComponent,
-      autonomous: isAutonomous,
-      tag: config.extends
-    };
-    const cls = registry[config.name].class;
-    if (isAutonomous)
-      customElements.define(config.name, cls);
-    else
-      customElements.define(config.name, cls, { extends: config.extends });
-  } else {
-    console.log("Already created component...");
-  }
-};
-
 // src/create/define.ts
 var value = (name2, value2, object) => {
   Object.defineProperty(object, name2, {
@@ -1896,17 +1931,25 @@ var value = (name2, value2, object) => {
 };
 
 // src/create/helpers/start.ts
+var set2 = (esm2, keys, value2, writable = true) => {
+  Object.defineProperty(esm2, `__${keys.started}`, { value: value2, writable, configurable: false, enumerable: false });
+};
 function start_default(keys, callbacks, asyncCallback) {
+  let output;
   if (this[keys.options].await) {
-    return asyncConnect.call(this, keys, async () => {
+    output = asyncConnect.call(this, keys, async () => {
       if (asyncCallback)
         await asyncCallback();
       connect.call(this, keys, callbacks);
+      set2(this, keys, true, false);
     });
+    set2(this, keys, output);
   } else {
     asyncConnect.call(this, keys, asyncCallback);
-    return connect.call(this, keys, callbacks);
+    output = connect.call(this, keys, callbacks);
+    set2(this, keys, true, false);
   }
+  return output;
 }
 async function asyncConnect(keys, onReadyCallback) {
   await this[keys.connected];
@@ -2083,7 +2126,7 @@ var create_default = (id, esm2, parent, opts = {}) => {
       if (info2.name && info2.extends)
         define(info2, esm3);
     }
-    let el = create(id, esm2, parent, states, opts.utilities);
+    let el = create(id, esm2, parent, opts, states);
     const finalStates = states;
     esm2[specialKeys.element] = el;
     esm2[specialKeys.start] = () => start.call(esm2, specialKeys);
@@ -2102,16 +2145,7 @@ var create_default = (id, esm2, parent, opts = {}) => {
         };
       }
     }
-    const isESC = { value: "", enumerable: false };
-    if (typeof id === "string") {
-      const path = parent[specialKeys.path];
-      if (path)
-        isESC.value = [path, id];
-      else
-        isESC.value = [id];
-      isESC.value = isESC.value.join(keySeparator);
-    }
-    Object.defineProperty(esm2, specialKeys.path, isESC);
+    path_default(specialKeys, esm2, opts, id);
     Object.defineProperty(esm2, specialKeys.original, { value: copy, enumerable: false });
     esm2[specialKeys.resize] = finalStates.onresize;
     esm2[specialKeys.parent] = finalStates.parentNode;
@@ -2180,6 +2214,20 @@ function hierarchy(o, id, toMerge = {}, parent, directParent, opts = {}, callbac
 
 // src/index.ts
 var create2 = (config, toMerge = {}, options = {}) => {
+  const parent = config.__parent ?? toMerge.__parent ?? document.body;
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    const div = document.createElement("div");
+    const p1 = document.createElement("p");
+    const message = 'Sorry, this app is not supported on mobile devices.'
+    console.log(message)
+    p1.innerHTML = `<b><${message}</b>`;
+    div.appendChild(p1);
+    const p2 = document.createElement("p");
+    p2.innerText = "Please use a desktop or laptop computer to view this app.";
+    div.appendChild(p2);
+    div.style = "background: black; color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;";
+    parent.appendChild(div);
+  }
   options = deep(options);
   let monitor;
   if (options.monitor instanceof src_default) {
@@ -2247,7 +2295,8 @@ var create2 = (config, toMerge = {}, options = {}) => {
       }
     });
   }
-  return resolve(instancePromiseOrObject, onConnected);
+  const res = resolve(instancePromiseOrObject, onConnected);
+  return res;
 };
 var src_default2 = create2;
 var clone = deep;
