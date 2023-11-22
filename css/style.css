@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
 
 /*App and Nav*/
 :root {
     --fill-color: rgba(255,255,255,0.8);
     --stroke-color: white;
     --white: transparent;
-    --active-color: rgb(141, 225, 255);
+    --active-color: rgb(38, 178, 229);
     --nav-width: 75px;
   }
 
@@ -13,446 +14,78 @@
 }
 
 
-
-/* Hide scrollbar for IE, Edge and Firefox */
 body{
     margin: 0px;
-    background: black;
-    color: white;
-    font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+    font-family: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+    sans-serif;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    font-size: 130%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px 50px;
+    max-width: 1500px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+main > div {
+    max-width: 700px;
+    width: 100%;
+}
+
+p, li {
+    font-family: sans-serif
+}
+
+li {
+    margin: 10px 0px 0px 0px;
 }
 
 body::-webkit-scrollbar {
     display: none;
 }
 
-#portfolio .small, .small {
-    font-size: 30px;
-}
-
-p {
-    font-family: Roboto, sans-serif;
-}
-
-div {
-    display: block;
+h1, h2, h3, h4 {
+    margin: 10px 0px 0px 0px;
 }
 
 h1{
-    font-size: 50px;
+    font-size: 60px;
     font-weight: bold;
-    margin: 10px 0px 0px 0px;
+    padding: 0px;
 }
 
 h2{
-    font-size: 40px;
-    font-weight: bold;
-    margin: 10px 0px 0px 0px;
-}
-
-h3{
-    font-size: 22px;
+    font-size: 30px;
     font-weight: normal;
-    margin: 10px 0px 0px 0px;
-    color: rgb(222, 222, 222);
+    color: rgb(34, 34, 34);
 }
 
-h4{
+h3 {
+    font-size: 25px;
+    font-weight: normal;
+    color: rgb(34, 34, 34);
+}
+
+h4 {
     font-size: 20px;
     font-weight: normal;
-    margin: 10px 0px 0px 0px;
-    color: rgb(196, 196, 196);
-}
-
-#hero p {
-    font-size: 20px;
-    font-weight: normal;
-    margin: 10px 0px 0px 0px;
-}
-
-button {
-    /* width: 200px;  */
-    /* min-height: 50px;  */
-    cursor: pointer; 
-    color: gray;
-    font-family : inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    /* margin: 0px 20px 20px 0px; */
-    border: 1px solid gray;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 80%;
-    transition: 0.5s;
-}
-
-button:hover{
-    color: white;
-    border-color: white;
-}
-
-svg {
-    flex: none;
-    fill: white;
-    transition: fill .5s;
-    width: 22px;
-    margin: 10px;
-}
-
-svg:hover {
-    fill: rgb(141, 225, 255);
-}
-
-img {
-    align-self: center;
-}
-
-
-nav {
-    height: 100vh;
-    padding-top: 15px;
-    padding-bottom: 20px;
-    width: var(--nav-width);
-    position: fixed;
-    top: 0;
-    right: 10px;
-    z-index: 99;
-    /* transition: 0.5s; */
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px; */
-}
-
-nav img {
-    /* margin-bottom: 25px; */
-}
-
-nav > p {
-    padding: 15px 0px;
-    margin: 0px;
-}
-
-nav > p > a {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    text-transform: uppercase;
-    font-size: 80%;
-    font-weight: bold;
-}
-
-
-nav > span {
-    display: block;
-}
-
-footer {
-    /* height: 50px; */
-    padding: 25px 50px;
-    background: rgba(0,0,0,1); 
-}
-
-footer p {
-    margin: 0;
-}
-
-nav a.link {
-    margin-left: 20px;
-    font-size: 15px;
-}
-
-nav a {
-    text-decoration: none;
-}
-
-#me {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* flex-grow: 1; */
-}
-
-#me  > img {
-    border-radius: 100%;
-    width: 250px;
-    height: 250px;
-    margin: 25px;
-    margin-bottom: 10px;
+    color: rgb(34, 34, 34);
 }
 
 
 a {
-    color: rgb(225, 225, 225);
-    /* text-decoration: none; */
-    position: relative;
-    cursor: pointer;
-    /* padding: 5px 0px; */
-    transition: color .5s;
-}
-
-a:visited {
-    color: rgb(183, 183, 183);
-}
-
-a:hover {
+    text-decoration: none;
     color: var(--active-color);
 }
-
-a.active{
-    color: var(--active-color);
-}
-
-/* IDs */
-.overlay h2 {
-    font-size: 50px;
-}
-
-.overlay h3 {
-    font-weight: bold;
-    margin-top: 25px;
-}
-
-#loader {
-    background: black;
-    font-size: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding-right: 50px;
-}
-
-.overlay {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 98;
-    transition: opacity 1s;
-    backdrop-filter: blur(6px);
-    pointer-events: none;
-}
-
-.overlay img {
-    width: 100px;
-    height: 100px;
-}
-
-.overlay.open {
-    pointer-events: all;
-    opacity: 1;
-}
-
-.noscroll {
-    overflow: hidden
-}
-
-#hero {
-    width:100vw;
-    height: 100vh;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap-reverse;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/city-min.jpg');
-    background-size: cover;
-    background-position: center;
-    align-content: center;
-}
-
-#hero h1 {
-    font-size: 60px;
-}
-
-/* #hero > div {
-    padding: 50px;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.7);
-} */
-
-.feature {
-    width:100vw;
-    min-height: 50vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* flex-wrap: wrap; */
-}
-
-.feature > div:first-child {
-    flex-grow: 1;
-    min-width: 65%;
-    padding-right: 25px;
-}
-
-.feature > div:last-child {
-    flex-grow: 1;
-}
-
-
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: flex-start;
-}
-
-.gallery .small {
-    padding: 10px;
-}
-
-.gallery img {
-    width: 100px;
-    height: 100px;
-    /*flex-grow: 1;*/
-}
-
-#canvas-container {
-    position: relative;
-}
-
-
-/* Classes */
-
-.fullscreen{
-    width:100vw;
-    min-height: 100vh;
-}
-
-.debug {
-    background: red;
-}
-
-.soon {
-    opacity: 50%;
-    pointer-events: none;
-}
-
-.center {
-    text-align: center;
-}
-
-.seventyfive {
-    width: 75%;
-}
-
-
-.logo {
-    color: black;
-    text-decoration: none;
-}
-
-.logo img{
-    height: 45px;
-}
-
-.logo:visited {
-    color: black;
-}
-
-.social {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    flex-basis: 100%;
-}
-
-.unavailable{
-    color: #777777;
-    cursor: default;
-}
-
-
-
-
-ul {
-    padding: 0;
-    list-style-type: none;
-}
-
-li {
-    padding: 10px 0px;
-}
-
-section {
-    padding: 50px;
-    padding-right: calc(50px + var(--nav-width));
-}
-
-/* section hr {
-    margin-left:0;
-    width: 25px;
-} */
-
-#portfolio {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/work-min.jpg');
-}
-
-section h2 {
-    text-transform: uppercase;
-    font-size: 15px;
-}
- 
-
-[data-animation="outline"] .outline:hover::before ,  .outline.active{
-    height: 100%;
-  }
-
-  [data-animation="outline"] .outline::before {
-    height: 0;
-  }
-
-.outline {
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
-    color: var(--white);
-    -webkit-text-stroke: 1px var(--stroke-color);
-    text-decoration: none;
-    transform: 2s;
-  }
-
-
-  h1.outline {
-    -webkit-text-stroke: 2px var(--stroke-color);
-  }
-
-    .outline::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    overflow: hidden;
-    color: var(--fill-color);
-    white-space: nowrap;
-    transition: all 0.15s cubic-bezier(0.29, 0.73, 0.74, 1.02);
-  }
-  
-    [data-animation] .outline::before,
-    .outline:hover::before,  .outline.active {
-        width: 100%;
-    }
-  
-/* Media Queries */
-    @media only screen and (max-width: 987px) {
-
-
-        .overlay h2 {
-            font-size: 30px;
-        }
-       
-    }
-    
