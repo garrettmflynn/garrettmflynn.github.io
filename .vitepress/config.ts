@@ -8,11 +8,11 @@ export default defineConfig({
   title: "Garrett Flynn",
   description: "Building Neural Interfaces since 2019",
 
-  head: [['link', { rel: 'icon', href: '/assets/garrett-flynn.jpg' }]],
+  head: [['link', { rel: 'icon', href: '/garrett-flynn.jpg' }]],
   
   themeConfig: {
 
-    // logo: '/assets/garrett-flynn.jpg',
+    // logo: '/garrett-flynn.jpg',
 
     nav: [
       { text: 'Home', link: '/' },

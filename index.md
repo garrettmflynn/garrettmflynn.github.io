@@ -6,7 +6,7 @@ hero:
   text: I’m Garrett Flynn.
   tagline: Together, we can design applications for 8B brains
   image: 
-    src: /assets/garrett-flynn.jpg
+    src: /garrett-flynn.jpg
     alt: Garrett Flynn
 
   actions:
