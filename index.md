@@ -11,7 +11,7 @@ hero:
 
   actions:
     - theme: brand
-      text: How Do I Start?
+      text: Get Started
       link: /courses
     - theme: alt
       text: Learn More
