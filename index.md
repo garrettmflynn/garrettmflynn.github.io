@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Together, we can design applications for 8B brains
+  tagline: Together, we can build applications for 8B brains
   image: 
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
@@ -30,10 +30,10 @@ features:
 
 ---
 
-## My Current Role
-I'm a Senior Software Engineer at [Universal Brain], where I'm leading the development of an EEG-based application for treating depression well from Day One.
+## What I Do
+I'm currently a Senior Software Engineer at [Universal Brain], where I'm leading the development of an EEG-based application for treating depression well from Day One.
 
-## Beyond the Office
+### Beyond the Office
 I've been rolling my own brain-responsive applications since 2019. And I want to show you how to do the same.
 
 - [Neural Interfaces](https://neuralinterfaces.com) - A Catalog of Brain-Responsive Applications

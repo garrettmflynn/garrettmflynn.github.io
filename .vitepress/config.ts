@@ -17,7 +17,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Courses', link: '/courses' },
-      { text: 'Blog', link: '/posts' }
+      // { text: 'Blog', link: '/posts' }
     ],
 
     socialLinks: [
