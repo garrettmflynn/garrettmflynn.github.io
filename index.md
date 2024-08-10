@@ -4,14 +4,14 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Are you ready to build for 8B brains?
+  tagline: Ready to build for 8B brains?
   image: 
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
 
   actions:
     - theme: brand
-      text: Get Started
+      text: Get Started Today
       link: /courses
     - theme: alt
       text: Learn More
