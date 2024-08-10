@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Are you building applications for 8B brains?
+  tagline: Are you ready to build for 8B brains?
   image: 
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
@@ -38,6 +38,6 @@ I've been rolling my own brain-responsive applications since 2019. And I want to
 
 - [Neural Interfaces](https://neuralinterfaces.com) - A Catalog of Brain-Responsive Applications
 - [Brains@Play](https://brainsatplay.com) - An API for 8 Billion Brains
-- [Commoners](https://commoners.dev) - The Cross-Platform Framework for the Web
+- [Commoners](https://commoners.dev) - A Cross-Platform Framework for the Rest of Us
 
 [Universal Brain]: https://universal-brain.com
