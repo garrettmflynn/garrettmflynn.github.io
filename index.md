@@ -38,6 +38,6 @@ I've been rolling my own brain-responsive applications since 2019. And I want to
 
 - [Neural Interfaces](https://neuralinterfaces.com) - A Catalog of Brain-Responsive Applications
 - [Brains@Play](https://brainsatplay.com) - An API for 8 Billion Brains
-- [Commoners](https://commoners.dev) - The Cross-Platform Framework for the Rest of Us
+- [Commoners](https://commoners.dev) - Cross-Platform Development for the Rest of Us
 
 [Universal Brain]: https://universal-brain.com
