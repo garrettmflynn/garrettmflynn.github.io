@@ -26,7 +26,8 @@ const sortedPosts = getSorted( posts );
 </ul>
 
 <div v-else>
-    <p>There's nothing here yet! Check back later for updates.</p>
+    <p>There's nothing here yet!</p>
+    <small>Check back later for updates.</small>
 </div>
 
 <style scoped>
