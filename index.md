@@ -31,7 +31,7 @@ features:
 ---
 
 ## What I Do
-I'm currently a Senior Software Engineer at [Universal Brain], where I'm leading the development of an EEG-based application for treating depression well from Day One.
+I'm currently a Senior Software Engineer at [Universal Brain], where I'm leading the development of our EEG-based neurotyping platform for patients with major depressive disorder.
 
 ### Beyond the Office
 I've been rolling my own brain-responsive applications since 2019. And I want to show you how to do the same.
