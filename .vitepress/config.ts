@@ -36,6 +36,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'About Me', link: '/about' },
       { text: 'Courses', link: '/courses' },
       // { text: 'Blog', link: '/posts' }
     ],

@@ -4,40 +4,33 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Ready to build for 8B brains?
+  tagline: I build brain-responsive applications.
   image: 
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
 
   actions:
     - theme: brand
-      text: Get Started Today
+      text: Reach 8B Brains
       link: /courses
     - theme: alt
       text: Learn More
       link: /posts
 
 features:
-  - title: Integration
+  - title: Brains@Play
     details: Add brain signals to your app in minutes.
-    icon: 🔩
-  - title: Distribution
+    icon: 🧠
+    link: https://brainsatplay.com
+
+  - title: Neural Interfaces
     details: Ship your product to 8 billion brains.
-    icon: 👁️
-  - title: Innovation
-    details: Stay ahead in brain-responsive software.
-    icon: 💡
+    icon: 💻
+    link: https://neuralinterfaces.com
+
+  - title: Commoners
+    details: Cross-platform development for the rest of us. 
+    icon: 📲
+    link: https://commoners.dev
 
 ---
-
-## What I Do
-I'm currently a Senior Software Engineer at [Universal Brain], where I'm leading the development of our EEG-based neurotyping platform for patients with major depressive disorder.
-
-### Beyond the Office
-I've been rolling my own brain-responsive applications since 2019. And I want to show you how to do the same.
-
-- [Neural Interfaces](https://neuralinterfaces.com) - A Catalog of Brain-Responsive Applications
-- [Brains@Play](https://brainsatplay.com) - An API for 8 Billion Brains
-- [Commoners](https://commoners.dev) - Cross-Platform Development for the Rest of Us
-
-[Universal Brain]: https://universal-brain.com
