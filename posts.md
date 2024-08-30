@@ -1,5 +1,5 @@
 ---
-title: Blog
+title: Posts
 sidebar: false
 ---
 
@@ -10,12 +10,12 @@ const sortedPosts = getSorted( posts );
 </script>
 
 <ul v-if="sortedPosts.length">
-    <li 
+    <li
         v-for="post of sortedPosts"
     >
-        <a 
-            :href="post.url" 
-            v-bind:style="{ 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + post.frontmatter.image + ')' }"        
+        <a
+            :href="post.url"
+            v-bind:style="{ 'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(' + post.frontmatter.image + ')' }"
         >
             <div>
                 <strong>{{ post.frontmatter.title }}</strong><br/>
