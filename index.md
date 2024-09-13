@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Let's build software for 8B brains
+  tagline: Let's build software together
   image:
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
