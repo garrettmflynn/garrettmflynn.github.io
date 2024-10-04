@@ -13,7 +13,9 @@ image: /brainsatplay-hero.jpg
 #   link: /notes/recently-february-2024
 ---
 
-With over a year since the dissolution of Brains@Play LLC, there's only one thing I can say: **Whew, what a ride. Glad that's over!**
+With over a year since the dissolution of Brains@Play LLC, there's only one thing I can say.
+
+**Whew, what a ride. Glad that's over!**
 
 ## What Happened?
 Brains@Play was a wonderful vehicle for exploring [accessible neurotechnology development](https://dl.acm.org/doi/10.1145/3594806.3594810) while a graduate student. Outside the bubble of academia, however, the harsh realities of entrepreneurship set in.
@@ -38,6 +40,6 @@ It's been a privilege to work with such a talented team dedicated to improving t
 ## What's Next?
 Unfortunately, my work at UB has left little time for personal projects.
 
-The Brain@Play website has been refactored for archival purposes, and I've shifted my independent software development work to [Neural Interfaces](https://neuralinterfaces.com).
+The [Brain@Play website](https://brainsatplay.com) has been refactored for archival purposes, and I've shifted my independent software development work to [Neural Interfaces](https://neuralinterfaces.com).
 
 I'm excited for what the next chapter holds. Thank you for following along on this journey!
