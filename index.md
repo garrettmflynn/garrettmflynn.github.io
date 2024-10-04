@@ -4,15 +4,15 @@ layout: home
 hero:
   name: Hello!
   text: I’m Garrett Flynn.
-  tagline: Let's build software together
+  tagline: Let's build software together.
   image:
     src: /garrett-flynn.jpg
     alt: Garrett Flynn
 
   actions:
     - theme: brand
-      text: Get Started
-      link: /courses
+      text: About Me
+      link: /about
     - theme: alt
       text: Learn More
       link: /posts
@@ -23,13 +23,13 @@ features:
     icon: 📲
     link: https://commoners.dev
 
-  - title: Brains@Play
-    details: The API for 8 Billion Brains
-    icon: 🧠
-    link: https://brainsatplay.com
-
   - title: Neural Interfaces
     details: Brain-Computer Interfaces for the Rest of Us
-    icon: 💻
+    icon: 🧠
     link: https://neuralinterfaces.com
+
+  - title: Brains@Play
+    details: An Archive of a Past Life
+    icon: 📜
+    link: https://brainsatplay.com
 ---
