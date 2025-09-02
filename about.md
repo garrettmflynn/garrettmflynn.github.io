@@ -16,7 +16,6 @@ Outside of the office, I'm an avid indoor rock climber and enjoy caring for my f
         <small>Jean Shorts (a.k.a. "Jorts")</small>
     </div>
     <div>
-        <img src="/poly.jpg" width=200 alt="Polymer the Cat" style="border-radius: 50%;">
         <img src="/poly.jpg" width=300 alt="Polymer the Cat" style="border-radius: 50%;">
         <small>Polymer (a.k.a. "Poly")</small>
     </div>
